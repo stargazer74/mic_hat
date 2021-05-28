@@ -6,7 +6,7 @@ import json
 import time
 import pixels
 
-TOPIC = "hermes/hotword/jarvis_raspberry-pi/detected"
+TOPIC = "hermes/#"
 BROKER_ADDRESS = "smarthome.privat"
 PORT = 1883
 SIDE_ID = "sat-office"
@@ -18,12 +18,20 @@ def on_message(client, userdata, message):
     msg = str(message.payload.decode("utf-8"))
     m_in = json.loads(msg)
     side_id = m_in["siteId"]
-    print(message.topic)
     if side_id == SIDE_ID:
-        led.wakeup()
-        led.think()
-        time.sleep(3)
-        led.off()
+        print(message.topic)
+        if message.topic == "hermes/hotword/jarvis_raspberry-pi/detected":
+            led.wakeup()
+            led.think()
+            time.sleep(3)
+            led.off()
+        if message.topic == "hermes/tts/say":
+            while True:
+                led.speak()
+        if message.topic == "hermes/tts/sayFinished":
+            led.off()
+
+
 
 
 def on_connect(client, userdata, flags, rc):
