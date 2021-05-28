@@ -17,7 +17,6 @@ def on_message(client, userdata, message):
     msg = str(message.payload.decode("utf-8"))
     m_in = json.loads(msg)
     sideId = m_in["siteId"]
-    led.wakeup()
     led.think()
     time.sleep(3)
     led.off()
