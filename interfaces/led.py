@@ -9,6 +9,7 @@ import pixels
 TOPIC = "hermes/hotword/jarvis_raspberry-pi/detected"
 BROKER_ADDRESS = "smarthome.privat"
 PORT = 1883
+SIDE_ID = "sat-office"
 
 led = pixels.Pixels()
 
@@ -16,11 +17,13 @@ led = pixels.Pixels()
 def on_message(client, userdata, message):
     msg = str(message.payload.decode("utf-8"))
     m_in = json.loads(msg)
-    sideId = m_in["siteId"]
-    led.wakeup()
-    led.think()
-    time.sleep(3)
-    led.off()
+    side_id = m_in["siteId"]
+    print(message.topic)
+    if side_id == SIDE_ID:
+        led.wakeup()
+        led.think()
+        time.sleep(3)
+        led.off()
 
 
 def on_connect(client, userdata, flags, rc):
