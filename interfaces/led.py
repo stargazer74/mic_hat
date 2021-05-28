@@ -10,7 +10,7 @@ TOPIC = "hermes/hotword/jarvis_raspberry-pi/detected"
 BROKER_ADDRESS = "smarthome.privat"
 PORT = 1883
 
-foo = pixels.Pixels()
+led = pixels.Pixels()
 
 
 def on_message(client, userdata, message):
@@ -19,10 +19,9 @@ def on_message(client, userdata, message):
     print(m_in["siteId"])
     print("message received: ", msg)
     print("message topic: ", message.topic)
-    while True:
-        foo.wakeup()
-        time.sleep(3)
-        foo.off()
+    led.wakeup()
+    time.sleep(3)
+    led.off()
 
 
 def on_connect(client, userdata, flags, rc):
