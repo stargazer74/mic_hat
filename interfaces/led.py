@@ -10,7 +10,7 @@ TOPIC_TTS = "hermes/tts/#"
 TOPIC_HOTWORD = "hermes/hotword/#"
 BROKER_ADDRESS = "smarthome.privat"
 PORT = 1883
-SIDE_ID = "sat-office"
+SIDE_ID = "MY_SITE_ID"
 
 led = pixels.Pixels()
 
