@@ -26,8 +26,7 @@ def on_message(client, userdata, message):
             time.sleep(3)
             led.off()
         if message.topic == "hermes/tts/say":
-            while True:
-                led.speak()
+            led.speak()
         if message.topic == "hermes/tts/sayFinished":
             led.off()
 
