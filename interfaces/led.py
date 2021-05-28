@@ -6,7 +6,8 @@ import json
 import time
 import pixels
 
-TOPIC = "hermes/#"
+TOPIC_TTS = "hermes/tts/#"
+TOPIC_HOTWORD = "hermes/hotword/#"
 BROKER_ADDRESS = "smarthome.privat"
 PORT = 1883
 SIDE_ID = "sat-office"
@@ -19,7 +20,7 @@ def on_message(client, userdata, message):
     m_in = json.loads(msg)
     side_id = m_in["siteId"]
     if side_id == SIDE_ID:
-        print(message.topic)
+        print("message topic = ", message.topic)
         if message.topic == "hermes/hotword/jarvis_raspberry-pi/detected":
             led.wakeup()
             led.think()
@@ -31,11 +32,9 @@ def on_message(client, userdata, message):
             led.off()
 
 
-
-
 def on_connect(client, userdata, flags, rc):
     print("Connected to MQTT Broker: " + BROKER_ADDRESS)
-    client.subscribe(TOPIC)
+    client.subscribe([(TOPIC_TTS, 0), (TOPIC_HOTWORD, 0)])
 
 
 if __name__ == "__main__":
