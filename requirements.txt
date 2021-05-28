@@ -1,3 +1,6 @@
-spidev
+spidev~=3.5
 rpi.gpio
 pyaudio
+
+paho-mqtt~=1.5.1
+argparse~=1.2.1
